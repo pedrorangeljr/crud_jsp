@@ -10,7 +10,7 @@
 
 	<div align="center">
 
-		<form action="ServletLivros" method="post">
+		<form action="servletsLogin" method="post">
 
 			<table border="1" cellpadding="5">
 
