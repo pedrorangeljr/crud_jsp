@@ -88,4 +88,62 @@ public class DaoContatos {
 			e.printStackTrace();
 		}
 	}
+	
+	/*Metodo consultar*/
+	
+	public Contatos consultar(String id) throws Exception{
+		
+		String sql = "SELECT * FROM contato WHERE id = '"+id+"'";
+		PreparedStatement consultar = connection.prepareStatement(sql);
+		ResultSet resultSet = consultar.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			Contatos contato = new Contatos();
+			
+			contato.setId(resultSet.getLong("id"));
+			contato.setNome(resultSet.getString("nome"));
+			contato.setTelefone(resultSet.getString("telefone"));
+			contato.setEmail(resultSet.getString("email"));
+			contato.setLogin(resultSet.getString("login"));
+			contato.setSenha(resultSet.getString("senha"));
+			
+			return contato;
+		}
+		
+		return null;
+	}
+	
+	/*Metodo atualizar*/
+	
+	public void atualizar(Contatos contato) {
+		
+		try {
+			
+			String sql = "UPDATE contato SET nome = ?, telefone = ?, email = ?, login= ?, senha = ? WHERE id = " + contato.getId();
+			PreparedStatement update = connection.prepareStatement(sql);
+			
+			update.setString(1, contato.getNome());
+			update.setString(2, contato.getTelefone());
+			update.setString(3, contato.getEmail());
+			update.setString(4, contato.getLogin());
+			update.setString(5, contato.getSenha());
+			update.executeUpdate();
+			
+			connection.commit();
+			
+		} catch (Exception e) {
+			
+			try {
+				
+				connection.rollback();
+				
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			
+			e.printStackTrace(); // imprime a pilha de erro no console
+		}
+	}
 }

@@ -40,6 +40,15 @@ public class ServletsContato extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			}
+			
+			else if(acao.equalsIgnoreCase("editar")) {
+				
+				Contatos contato = daoContatos.consultar(cont);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar.jsp");
+				request.setAttribute("cont", contato);
+				dispatcher.forward(request, response);
+			}
 
 			else if (acao.equalsIgnoreCase("listartodos")) {
 
@@ -68,7 +77,7 @@ public class ServletsContato extends HttpServlet {
 
 			Contatos contatos = new Contatos();
 
-			contatos.setId(id != null && !id.isEmpty() ? Long.parseLong(id) : null);
+			contatos.setId(id != null && !id.isEmpty() ? Long.parseLong(id) : 0);
 			contatos.setNome(nome);
 			contatos.setTelefone(telefone);
 			contatos.setEmail(email);
@@ -78,6 +87,11 @@ public class ServletsContato extends HttpServlet {
 			if (id == null || id.isEmpty()) {
 
 				daoContatos.salvarContatos(contatos);
+			}
+			
+			else if(id != null && !id.isEmpty()) {
+				
+				daoContatos.atualizar(contatos);
 			}
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar.jsp");
