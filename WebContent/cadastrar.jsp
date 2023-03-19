@@ -63,7 +63,6 @@
 				<th>Nome</th>
 				<th>Telefone</th>
 				<th>E-mail</th>
-				<th>Login</th>
 				<th>Ações</th>
 			</tr>
 
@@ -75,12 +74,8 @@
 					<td><c:out value="${cont.nome }"></c:out></td>
 					<td><c:out value="${cont.telefone }"></c:out></td>
 					<td><c:out value="${cont.email }"></c:out></td>
-					<td><c:out value="${cont.login }"></c:out></td>
 
-					
-					<td><a>Editar</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deletar.php?id=<?php echo $livros['id']; ?>"
+					<td><a href="">Editar</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="ServletsContato?acao=delete&cont=${cont.id }"
 						onclick="return confirm('Tem certeza que deseja excluir ?')">Deletar</a>
 					</td>
 

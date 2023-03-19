@@ -36,29 +36,56 @@ public class DaoContatos {
 		connection.commit();
 	}
 
-	/*Metodo listar contatos*/
-	
-	public List<Contatos> listarContatos() throws Exception{
-		
+	/* Metodo listar contatos */
+
+	public List<Contatos> listarContatos() throws Exception {
+
 		List<Contatos> listar = new ArrayList<Contatos>();
-		
+
 		String sql = "SELECT * FROM contato";
 		PreparedStatement select = connection.prepareStatement(sql);
 		ResultSet resultSet = select.executeQuery();
-		
-		while(resultSet.next()) {
-			
+
+		while (resultSet.next()) {
+
 			Contatos contatos = new Contatos();
-			
+
 			contatos.setId(resultSet.getLong("id"));
 			contatos.setNome(resultSet.getString("nome"));
 			contatos.setTelefone(resultSet.getString("telefone"));
 			contatos.setEmail(resultSet.getString("email"));
 			contatos.setLogin(resultSet.getString("login"));
-			
+
 			listar.add(contatos);
 		}
-		
+
 		return listar;
+	}
+
+	/* metodo deletar por ID */
+
+	public void delete(String id) {
+
+		try {
+
+			String sql = "DELETE FROM contato WHERE id = '" + id + "'";
+			PreparedStatement delete = connection.prepareStatement(sql);
+			delete.execute();
+
+			connection.commit();
+
+		} catch (Exception e) {
+
+			try {
+
+				connection.rollback();
+
+			} catch (SQLException e1) {
+
+				e1.printStackTrace();
+			}
+
+			e.printStackTrace();
+		}
 	}
 }
