@@ -12,7 +12,7 @@
 	<h2>Seja bem vindo ao sistema JSP</h2>
 	<br />
 
-	<a href="cadastrar.jsp">Cadastrar Usuários</a>
+	<a href="ServletsContato?acao=listartodos">Cadastrar Usuários</a>
 
 </body>
 </html>

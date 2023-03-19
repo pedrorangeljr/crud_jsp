@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,50 +9,88 @@
 </head>
 <body>
 
-<center>
+	<center>
 		<h1>Cadastro de Usuários</h1>
-		
+
 	</center>
 	<div align="center">
 
-		<form action="ServletLivros" method="post">
+		<form action="ServletsContato" method="post">
 
 			<table border="1" cellpadding="5">
-			
-					<input type="hidden" name="id" value="" />
-				
+
+				<input type="hidden" name="id" value="" />
+
 				<tr>
 					<th>Nome:</th>
 					<td><input type="text" name="nome" size="45" /></td>
 				</tr>
 				<tr>
 					<th>Telefone:</th>
-					<td><input type="text" name="telefone" size="45" />
-					</td>
+					<td><input type="text" name="telefone" size="45" /></td>
 				</tr>
 				<tr>
 					<th>E-mail:</th>
-					<td><input type="email" name="email" size="45" />
-					</td>
+					<td><input type="email" name="email" size="45" /></td>
 				</tr>
 				<tr>
 					<th>Login:</th>
-					<td><input type="text" name="login" size="45" />
-					</td>
+					<td><input type="text" name="login" size="45" /></td>
 				</tr>
 				<tr>
 					<th>Senha:</th>
-					<td><input type="password" name="senha" size="45" />
-					</td>
+					<td><input type="password" name="senha" size="45" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
-						value="Cadastrar" /> 
+						value="Cadastrar" />
 				</tr>
 			</table>
 		</form>
 	</div>
 
+	<br />
+	<br />
+
+	<div align="center">
+		<table border="1" clellpadding="5">
+
+			<caption>
+				<h2>Lista de Livros</h2>
+			</caption>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Telefone</th>
+				<th>E-mail</th>
+				<th>Login</th>
+				<th>Ações</th>
+			</tr>
+
+			<c:forEach items="${contatos }" var="cont">
+
+				<tr>
+
+					<td><c:out value="${cont.id }"></c:out></td>
+					<td><c:out value="${cont.nome }"></c:out></td>
+					<td><c:out value="${cont.telefone }"></c:out></td>
+					<td><c:out value="${cont.email }"></c:out></td>
+					<td><c:out value="${cont.login }"></c:out></td>
+
+					
+					<td><a>Editar</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="deletar.php?id=<?php echo $livros['id']; ?>"
+						onclick="return confirm('Tem certeza que deseja excluir ?')">Deletar</a>
+					</td>
+
+				</tr>
+
+			</c:forEach>
+
+		</table>
+
+	</div>
 
 
 </body>
